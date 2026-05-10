@@ -1,0 +1,43 @@
+---
+title: "The SQL Pattern That Made My Python Script Obsolete"
+date: "2025-07-03"
+excerpt: "I had a 200-line Python script for a transformation that turned out to be a 12-line SQL window function. Here's the pattern — and why I reach for it first now."
+tags: ["SQL", "Snowflake", "Data Engineering"]
+---
+
+I once had a Python script that computed rolling 7-day averages, flagged anomalies, and joined the results back to a dimension table. It was 200 lines. It had three dependencies. It ran in a scheduled Lambda.
+
+Then I learned window functions.
+
+## The Pattern
+
+```sql
+SELECT
+  date,
+  metric_value,
+  AVG(metric_value) OVER (
+    ORDER BY date
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+  ) AS rolling_7d_avg,
+  metric_value / NULLIF(LAG(metric_value, 7) OVER (ORDER BY date), 0) - 1 AS wow_change
+FROM daily_metrics
+```
+
+That's it. That's the script.
+
+## Why This Matters
+
+Moving the logic into SQL means:
+
+- **No infrastructure.** No Lambda, no container, no scheduled job.
+- **No dependencies.** `pandas` is not needed here.
+- **It runs where the data lives.** Snowflake is already doing the heavy lifting.
+- **Anyone can read it.** SQL is the lingua franca of data teams.
+
+## When Python Is Still the Right Call
+
+When you need to call an external API. When the logic is inherently imperative. When you're generating files or sending emails.
+
+But for transformations? Reach for SQL first. The window function library alone covers 80% of what most Python data scripts do.
+
+I rewrote that Lambda as a Snowflake view. The Lambda is gone. The data is the same. The maintenance burden dropped to zero.

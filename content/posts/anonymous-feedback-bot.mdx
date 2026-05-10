@@ -1,0 +1,32 @@
+---
+title: "I Built an Anonymous Slack Bot in a Weekend — Here's Why"
+date: "2025-09-28"
+excerpt: "Teams don't give honest feedback because there's no safe way to. I fixed that with a Cloudflare Workers-based Slack bot. Zero cold start. Modal input. Done."
+tags: ["Cloudflare Workers", "Slack API", "JavaScript"]
+---
+
+The problem wasn't that people didn't have opinions. The problem was that there was no safe place to put them.
+
+## The Idea
+
+Anonymous feedback inside Slack, where the team already lives. No new tool to log into, no form to forget about. Just a `/feedback` command, a modal, and a thread in a dedicated channel.
+
+## Why Cloudflare Workers
+
+I wanted zero cold start and free hosting. Cloudflare Workers delivers both.
+
+The entire bot is a single JavaScript file deployed to Cloudflare's edge network. It handles Slack's signature verification, parses the modal submission, and posts the anonymized message to a channel — in well under 50ms.
+
+## Three Feedback Categories
+
+1. **Process** — how we work
+2. **Leadership** — how we're led  
+3. **Culture** — how we treat each other
+
+Each submission gets threaded under the category header in a private `#feedback-inbox` channel. Only admins can see who posted (and only if they dig through the Workers logs — which they won't).
+
+## From Idea to Production
+
+Friday evening to Sunday afternoon. One Cloudflare account, one Slack app, one `wrangler deploy`.
+
+The best tools are the ones that get out of the way.

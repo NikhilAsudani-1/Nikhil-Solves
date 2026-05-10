@@ -1,0 +1,28 @@
+---
+title: "How I Replaced 4 Manual Reports with One Streamlit App"
+date: "2025-11-14"
+excerpt: "Every Monday morning, four reports. Every Monday morning, 3 hours gone. Here's how I built a Streamlit app inside Snowflake that made them one-click."
+tags: ["Snowflake", "Python", "Streamlit", "Automation"]
+---
+
+Every Monday morning, the same four reports. Pull the data, clean it, paste it into Excel, format it, email it. Three hours gone before the week even started.
+
+So I built the thing that should have existed already.
+
+## The Setup
+
+The reports lived in Snowflake. The logic was SQL. The formatting was pure manual suffering.
+
+I used Snowflake's Streamlit-in-Snowflake feature to build a web app that lives directly in the data warehouse — no external hosting, no credentials to manage, no "wait for IT."
+
+## What It Does
+
+One button per report. Click it, get a formatted Excel file. That's it.
+
+Under the hood: parameterized SQL queries, `lxml` for Excel formatting, and a date-range picker so anyone on the team can pull historical data without bugging an analyst.
+
+## The Result
+
+12 hours saved per week. Across a year, that's 600 hours. That's 15 full work weeks.
+
+The boring math is always the most convincing argument.
