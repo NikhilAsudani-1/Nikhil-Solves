@@ -55,7 +55,7 @@ function BlogRow({ post }: { post: Post }) {
           style={{
             fontSize: 16,
             fontWeight: 600,
-            color: hovered ? "#38bdf8" : "var(--text-primary)",
+            color: hovered ? "var(--accent-interactive)" : "var(--text-primary)",
             transition: "color 0.15s ease",
             marginBottom: 6,
             fontFamily: "var(--font-space-grotesk), sans-serif",
@@ -109,7 +109,7 @@ export default function BuildLog({ posts }: { posts: Post[] }) {
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
               fontSize: 13,
-              color: "#38bdf8",
+              color: "var(--accent-interactive)",
               whiteSpace: "nowrap",
             }}
           >

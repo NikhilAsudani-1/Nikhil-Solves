@@ -39,7 +39,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           right: 0,
           height: 2,
           background:
-            "linear-gradient(to right, #38bdf8, transparent)",
+            "linear-gradient(to right, var(--accent-interactive), transparent)",
           opacity: hovered ? 1 : 0,
           transition: "opacity 0.2s ease",
         }}
@@ -92,7 +92,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             fontFamily: "var(--font-space-grotesk), sans-serif",
             fontSize: 28,
             fontWeight: 700,
-            color: "#38bdf8",
+            color: "var(--accent-interactive)",
             letterSpacing: "-0.03em",
           }}
         >

@@ -122,7 +122,7 @@ export default function Stack() {
             style={{
               fontFamily: "var(--font-jetbrains-mono), monospace",
               fontSize: 13,
-              color: "#38bdf8",
+              color: "var(--accent-interactive)",
               whiteSpace: "nowrap",
             }}
           >

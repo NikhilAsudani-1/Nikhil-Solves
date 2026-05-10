@@ -43,23 +43,12 @@ export default function Hero() {
           <span
             style={{
               display: "inline-block",
-              width: 40,
+              width: 60,
               height: 2,
-              background: "linear-gradient(to right, #38bdf8, transparent)",
-              boxShadow: "0 0 8px rgba(56,189,248,0.6)",
+              background: "linear-gradient(to right, var(--accent-interactive), transparent)",
+              boxShadow: "0 0 8px color-mix(in srgb, var(--accent-interactive) 60%, transparent)",
             }}
           />
-          <span
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: 12,
-              color: "#38bdf8",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            Part Analyst, Part Builder
-          </span>
         </div>
 
         {/* Headline */}
@@ -74,26 +63,22 @@ export default function Hero() {
             margin: 0,
           }}
         >
-          I analyze data.
-          <br />
-          <span style={{ color: "var(--text-secondary)", fontWeight: 400 }}>
-            Then I build what&apos;s missing.
-          </span>
+          Part Analyst, Part Builder.
         </h1>
 
         {/* Description */}
         <p
           style={{
             marginTop: 24,
-            maxWidth: 560,
+            maxWidth: 800,
             fontSize: 17,
             lineHeight: 1.7,
             color: "var(--text-secondary)",
           }}
         >
-          Senior Data Analyst who writes production SQL, builds Streamlit apps,
-          ships Slack bots, and automates everything that shouldn&apos;t be done
-          by hand.
+          Hi, I&apos;m Nikhil - Analyst by Day, Builder by Night.
+          <br />
+          Powered by too much coffee.
         </p>
 
         {/* CTAs */}
@@ -106,7 +91,7 @@ export default function Hero() {
               gap: 6,
               padding: "12px 24px",
               borderRadius: 8,
-              background: "#38bdf8",
+              background: "var(--accent-interactive)",
               color: "#0a0f1a",
               fontWeight: 600,
               fontSize: 14,
@@ -132,7 +117,7 @@ export default function Hero() {
               padding: "12px 24px",
               borderRadius: 8,
               border: "1px solid var(--border-hover)",
-              color: "#38bdf8",
+              color: "var(--accent-interactive)",
               fontWeight: 500,
               fontSize: 14,
               textDecoration: "none",

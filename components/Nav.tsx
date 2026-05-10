@@ -9,6 +9,9 @@ export default function Nav() {
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // Used only in event handlers (never in SSR markup), so no hydration risk.
+  const accent = theme === "light" ? "#0284c7" : "#38bdf8";
+
   useEffect(() => {
     setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -46,14 +49,14 @@ export default function Nav() {
           href="#"
           style={{
             fontFamily: "var(--font-jetbrains-mono), monospace",
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: 500,
             color: "var(--text-primary)",
             textDecoration: "none",
-            letterSpacing: "-0.02em",
+            // letterSpacing: "-0.02em",
           }}
         >
-          nikhil<span style={{ color: "#38bdf8" }}>solves</span>
+          nikhil<span style={{ color: "var(--accent-interactive)" }}>solves</span>
         </a>
 
         {/* Links + Toggle */}
@@ -73,13 +76,13 @@ export default function Nav() {
                 href={href}
                 style={{
                   fontFamily: "var(--font-jetbrains-mono), monospace",
-                  fontSize: 13,
+                  fontSize: 14,
                   color: "var(--text-muted)",
                   textDecoration: "none",
                   transition: "color 0.15s ease",
                 }}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLAnchorElement).style.color = "#38bdf8")
+                  ((e.target as HTMLAnchorElement).style.color = accent)
                 }
                 onMouseLeave={(e) =>
                   ((e.target as HTMLAnchorElement).style.color =
@@ -112,7 +115,7 @@ export default function Nav() {
               onMouseEnter={(e) => {
                 const btn = e.currentTarget;
                 btn.style.borderColor = "var(--border-hover)";
-                btn.style.color = "#38bdf8";
+                btn.style.color = accent;
               }}
               onMouseLeave={(e) => {
                 const btn = e.currentTarget;

@@ -36,6 +36,7 @@
   --accent-glow: rgba(56, 189, 248, 0.25);
   --noise-opacity: 0.03;
   --orb-opacity: 0.12;
+  --accent-interactive: #38bdf8;
 }
 
 /* ── Light mode ── */
@@ -48,11 +49,12 @@
   --text-secondary: #334155;
   --text-muted: #64748b;
   --border: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(56, 189, 248, 0.5);
-  --accent-dim: rgba(56, 189, 248, 0.1);
-  --accent-glow: rgba(56, 189, 248, 0.2);
+  --border-hover: rgba(2, 132, 199, 0.45);
+  --accent-dim: rgba(2, 132, 199, 0.1);
+  --accent-glow: rgba(2, 132, 199, 0.2);
   --noise-opacity: 0.015;
   --orb-opacity: 0.08;
+  --accent-interactive: #0284c7;
 }
 
 /* ── Base ── */
