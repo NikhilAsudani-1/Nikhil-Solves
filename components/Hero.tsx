@@ -94,7 +94,7 @@ export default function Hero() {
           </a>
           <a
             href="/resume.pdf"
-            download
+            download="Nikhil Asudani Resume.pdf"
             style={{
               display: "inline-flex",
               alignItems: "center",
