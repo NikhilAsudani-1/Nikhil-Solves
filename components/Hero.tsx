@@ -5,7 +5,7 @@ import Terminal from "./Terminal";
 export default function Hero() {
   return (
     <section
-      style={{ position: "relative", padding: "96px 24px 80px", overflow: "hidden" }}
+      style={{ position: "relative", padding: "72px 24px 80px", overflow: "hidden" }}
     >
       {/* Gradient orb */}
       <div
@@ -31,26 +31,6 @@ export default function Hero() {
           zIndex: 1,
         }}
       >
-        {/* Eyebrow */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: 24,
-          }}
-        >
-          <span
-            style={{
-              display: "inline-block",
-              width: 60,
-              height: 2,
-              background: "linear-gradient(to right, var(--accent-interactive), transparent)",
-              boxShadow: "0 0 8px color-mix(in srgb, var(--accent-interactive) 60%, transparent)",
-            }}
-          />
-        </div>
-
         {/* Headline */}
         <h1
           style={{
@@ -71,15 +51,20 @@ export default function Hero() {
           style={{
             marginTop: 24,
             maxWidth: 800,
-            fontSize: 17,
+            fontSize: 20,
             lineHeight: 1.7,
             color: "var(--text-secondary)",
           }}
         >
           Hi, I&apos;m Nikhil - Analyst by Day, Builder by Night.
-          <br />
-          Powered by too much coffee.
+          {/* <br /> */}
+          {/* Powered by too much coffee. */}
         </p>
+
+        {/* Terminal */}
+        <div style={{ marginTop: 40 }}>
+          <Terminal />
+        </div>
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: 14, marginTop: 36, flexWrap: "wrap" }}>
@@ -135,11 +120,6 @@ export default function Hero() {
           >
             Download resume
           </a>
-        </div>
-
-        {/* Terminal */}
-        <div style={{ marginTop: 56 }}>
-          <Terminal />
         </div>
       </div>
     </section>

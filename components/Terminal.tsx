@@ -9,7 +9,7 @@ export default function Terminal() {
         fontFamily: "var(--font-jetbrains-mono), monospace",
         fontSize: 13,
         lineHeight: 1.8,
-        maxWidth: 520,
+        maxWidth: 800,
         width: "100%",
       }}
     >
@@ -22,26 +22,42 @@ export default function Terminal() {
 
       <div>
         <span style={{ color: "#34d399" }}>❯ </span>
-        <span style={{ color: "#f1f5f9" }}>nikhil --status</span>
+        <span style={{ color: "#f1f5f9" }}>nikhil --title</span>
       </div>
       <div style={{ color: "#94a3b8", paddingLeft: 16 }}>
-        → Available for freelance &amp; remote roles
+        → Senior Analyst | Business Analytics, Automation & Data Products
       </div>
+
+      <div style={{ marginTop: 4 }}>
+        <span style={{ color: "#34d399" }}>❯ </span>
+        <span style={{ color: "#f1f5f9" }}>nikhil --experience</span>
+      </div>
+      <div style={{ color: "#94a3b8", paddingLeft: 16 }}>
+        → 3.5+ years | Retail & E-commerce | Customer, Product & Marketing Analytics
+      </div>  
 
       <div style={{ marginTop: 4 }}>
         <span style={{ color: "#34d399" }}>❯ </span>
         <span style={{ color: "#f1f5f9" }}>nikhil --stack</span>
       </div>
       <div style={{ color: "#94a3b8", paddingLeft: 16 }}>
-        → SQL · Python · Next.js · Streamlit · Cloudflare
+        → Full Stack Analytics, AI & APIs, Workflow & Automation, Data Apps, Python
       </div>
 
       <div style={{ marginTop: 4 }}>
         <span style={{ color: "#34d399" }}>❯ </span>
-        <span style={{ color: "#f1f5f9" }}>nikhil --superpower</span>
+        <span style={{ color: "#f1f5f9" }}>nikhil --known-for</span>
       </div>
       <div style={{ color: "#94a3b8", paddingLeft: 16 }}>
-        → Turns messy data into working products
+        → Ownership, Hardwork, Cross-functional impact & Getting things done
+      </div>
+
+      <div style={{ marginTop: 4 }}>
+        <span style={{ color: "#34d399" }}>❯ </span>
+        <span style={{ color: "#f1f5f9" }}>nikhil --coffee-count</span>
+      </div>
+      <div style={{ color: "#94a3b8", paddingLeft: 16 }}>
+        → Too many. No regrets.
       </div>
 
       <div style={{ marginTop: 4 }}>
