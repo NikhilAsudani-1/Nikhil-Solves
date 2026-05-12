@@ -25,16 +25,15 @@ function BlogRow({ post }: { post: Post }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display: "flex",
-        gap: 32,
+        display: "block",
         padding: "20px 0",
         borderBottom: "1px solid var(--border)",
         textDecoration: "none",
         paddingLeft: hovered ? 8 : 0,
         transition: "padding-left 0.15s ease",
-        alignItems: "flex-start",
       }}
     >
+      <div className="blog-row-inner">
       {/* Date */}
       <span
         style={{
@@ -44,6 +43,7 @@ function BlogRow({ post }: { post: Post }) {
           whiteSpace: "nowrap",
           paddingTop: 3,
           minWidth: 88,
+          flexShrink: 0,
         }}
       >
         {post.date}
@@ -88,6 +88,7 @@ function BlogRow({ post }: { post: Post }) {
             </span>
           ))}
         </div>
+      </div>
       </div>
     </a>
   );

@@ -85,7 +85,7 @@ export default function Testimonials() {
             style={{
               flexShrink: 0,
               scrollSnapAlign: "start",
-              width: 320,
+              width: "clamp(280px, 80vw, 320px)",
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
               borderRadius: 12,

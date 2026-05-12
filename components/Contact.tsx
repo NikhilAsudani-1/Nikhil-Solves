@@ -66,6 +66,7 @@ function ContactLink({
       href={href}
       target={href.startsWith("mailto") ? undefined : "_blank"}
       rel="noopener noreferrer"
+      className="contact-btn"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

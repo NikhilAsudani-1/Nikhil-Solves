@@ -5,7 +5,7 @@ import Terminal from "./Terminal";
 export default function Hero() {
   return (
     <section
-      style={{ position: "relative", padding: "72px 24px 80px", overflow: "hidden" }}
+      style={{ position: "relative", padding: "clamp(48px, 8vw, 96px) 24px 80px", overflow: "hidden" }}
     >
       {/* Gradient orb */}
       <div
@@ -14,8 +14,8 @@ export default function Hero() {
           top: -120,
           left: "50%",
           transform: "translateX(-50%)",
-          width: 700,
-          height: 500,
+          width: "clamp(300px, 90vw, 700px)",
+          height: "clamp(250px, 60vw, 500px)",
           background:
             "radial-gradient(ellipse at center, rgba(56,189,248,var(--orb-opacity)) 0%, rgba(167,139,250,0.06) 40%, transparent 70%)",
           pointerEvents: "none",
@@ -35,7 +35,7 @@ export default function Hero() {
         <h1
           style={{
             fontFamily: "var(--font-space-grotesk), sans-serif",
-            fontSize: "clamp(2.4rem, 5vw, 4rem)",
+            fontSize: "clamp(2rem, 6vw, 4rem)",
             fontWeight: 700,
             lineHeight: 1.1,
             letterSpacing: "-0.03em",
@@ -49,25 +49,23 @@ export default function Hero() {
         {/* Description */}
         <p
           style={{
-            marginTop: 24,
+            marginTop: 20,
             maxWidth: 800,
-            fontSize: 20,
+            fontSize: "clamp(16px, 3vw, 20px)",
             lineHeight: 1.7,
             color: "var(--text-secondary)",
           }}
         >
           Hi, I&apos;m Nikhil - Analyst by Day, Builder by Night.
-          {/* <br /> */}
-          {/* Powered by too much coffee. */}
         </p>
 
         {/* Terminal */}
-        <div style={{ marginTop: 40 }}>
+        <div style={{ marginTop: 36 }}>
           <Terminal />
         </div>
 
         {/* CTAs */}
-        <div style={{ display: "flex", gap: 14, marginTop: 36, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
           <a
             href="#work"
             style={{
