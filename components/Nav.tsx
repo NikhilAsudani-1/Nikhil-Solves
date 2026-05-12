@@ -9,15 +9,27 @@ export default function Nav() {
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Used only in event handlers (never in SSR markup), so no hydration risk.
   const accent = theme === "light" ? "#0284c7" : "#38bdf8";
 
   useEffect(() => {
     setMounted(true);
+
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const onResize = () => {
+      setIsMobile(window.innerWidth < 640);
+      if (window.innerWidth >= 640) setMenuOpen(false);
+    };
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   const links = [
@@ -34,9 +46,10 @@ export default function Nav() {
         top: 0,
         zIndex: 50,
         borderBottom: `1px solid var(--border)`,
-        backgroundColor: scrolled || menuOpen
-          ? "color-mix(in srgb, var(--bg-base) 95%, transparent)"
-          : "transparent",
+        backgroundColor:
+          scrolled || menuOpen
+            ? "color-mix(in srgb, var(--bg-base) 95%, transparent)"
+            : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         transition: "background-color 0.2s ease",
       }}
@@ -67,119 +80,146 @@ export default function Nav() {
           nikhil<span style={{ color: "var(--accent-interactive)" }}>solves</span>
         </a>
 
-        {/* Desktop links + toggle */}
-        <div className="nav-links" style={{ alignItems: "center", gap: 28 }}>
+        {/* Desktop: links + toggle */}
+        {!isMobile && (
+          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+            {links.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono), monospace",
+                  fontSize: 14,
+                  color: "var(--text-muted)",
+                  textDecoration: "none",
+                  transition: "color 0.15s ease",
+                }}
+                onMouseEnter={(e) =>
+                  ((e.target as HTMLAnchorElement).style.color = accent)
+                }
+                onMouseLeave={(e) =>
+                  ((e.target as HTMLAnchorElement).style.color = "var(--text-muted)")
+                }
+              >
+                {label}
+              </a>
+            ))}
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                aria-label="Toggle theme"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 34,
+                  height: 34,
+                  borderRadius: 8,
+                  border: `1px solid var(--border)`,
+                  background: "var(--bg-card)",
+                  color: "var(--text-secondary)",
+                  cursor: "pointer",
+                  transition: "border-color 0.15s ease, color 0.15s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border-hover)";
+                  e.currentTarget.style.color = accent;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+              >
+                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Mobile: theme toggle + hamburger */}
+        {isMobile && (
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                aria-label="Toggle theme"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 34,
+                  height: 34,
+                  borderRadius: 8,
+                  border: `1px solid var(--border)`,
+                  background: "var(--bg-card)",
+                  color: "var(--text-secondary)",
+                  cursor: "pointer",
+                }}
+              >
+                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              </button>
+            )}
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Toggle menu"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 34,
+                height: 34,
+                borderRadius: 8,
+                border: `1px solid var(--border)`,
+                background: "var(--bg-card)",
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+              }}
+            >
+              {menuOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Mobile dropdown */}
+      {isMobile && menuOpen && (
+        <div
+          style={{
+            borderTop: `1px solid var(--border)`,
+            background: "var(--bg-card)",
+          }}
+        >
           {links.map(({ label, href }) => (
             <a
               key={label}
               href={href}
+              onClick={() => setMenuOpen(false)}
               style={{
+                display: "block",
                 fontFamily: "var(--font-jetbrains-mono), monospace",
                 fontSize: 14,
                 color: "var(--text-muted)",
                 textDecoration: "none",
-                transition: "color 0.15s ease",
+                padding: "14px 24px",
+                borderBottom: `1px solid var(--border)`,
+                transition: "color 0.15s ease, background 0.15s ease",
               }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLAnchorElement).style.color = accent)
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLAnchorElement).style.color = "var(--text-muted)")
-              }
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                el.style.color = accent;
+                el.style.background = "var(--accent-dim)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget;
+                el.style.color = "var(--text-muted)";
+                el.style.background = "transparent";
+              }}
             >
               {label}
             </a>
           ))}
-
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 34,
-                height: 34,
-                borderRadius: 8,
-                border: `1px solid var(--border)`,
-                background: "var(--bg-card)",
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-                transition: "border-color 0.15s ease, color 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                const btn = e.currentTarget;
-                btn.style.borderColor = "var(--border-hover)";
-                btn.style.color = accent;
-              }}
-              onMouseLeave={(e) => {
-                const btn = e.currentTarget;
-                btn.style.borderColor = "var(--border)";
-                btn.style.color = "var(--text-secondary)";
-              }}
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-          )}
         </div>
-
-        {/* Mobile: theme toggle + hamburger */}
-        <div className="nav-hamburger" style={{ alignItems: "center", gap: 10 }}>
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 34,
-                height: 34,
-                borderRadius: 8,
-                border: `1px solid var(--border)`,
-                background: "var(--bg-card)",
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-              }}
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-          )}
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle menu"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 34,
-              height: 34,
-              borderRadius: 8,
-              border: `1px solid var(--border)`,
-              background: "var(--bg-card)",
-              color: "var(--text-secondary)",
-              cursor: "pointer",
-            }}
-          >
-            {menuOpen ? <X size={16} /> : <Menu size={16} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile dropdown menu */}
-      <div className={`nav-mobile-menu${menuOpen ? " open" : ""}`}>
-        {links.map(({ label, href }) => (
-          <a
-            key={label}
-            href={href}
-            className="nav-mobile-link"
-            onClick={() => setMenuOpen(false)}
-          >
-            {label}
-          </a>
-        ))}
-      </div>
+      )}
     </nav>
   );
 }
