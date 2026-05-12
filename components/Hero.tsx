@@ -93,7 +93,7 @@ export default function Hero() {
             See my work ↓
           </a>
           <a
-            href="/resume.pdf"
+            href="/Nikhil Asudani Resume.pdf"
             download="Nikhil Asudani Resume.pdf"
             style={{
               display: "inline-flex",
